@@ -16,26 +16,27 @@ import sas.ita.com.myapplication.R;
  * Created by sasmob on 11/26/2017.
  */
 
-public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.ViewHolder>{
-    ArrayList<Student_Info> student;
+public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyViewHolder>{
     Context context;
+    //using to attatch with layout
+    ArrayList<Student_Info>student;
 
-    public Student_Adapter(ArrayList<Student_Info> student, Context context) {
-        this.student = student;
+    //where to display
+    public Student_Adapter(Context context, ArrayList<Student_Info>student){
         this.context = context;
+        this.student = student;
     }
 
     @Override
-    public Student_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view=inflater.inflate(R.layout.student_info, parent,false);
 
-        return new ViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(Student_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
         Student_Info student_info=student.get(position);
         holder.name.setText(student_info.getName());
         holder.image.setImageResource(student_info.getImage());
@@ -46,14 +47,16 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.ViewHo
         return student.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    //Views that goining to display on Recycler view
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         ImageView image;
 
-        public ViewHolder(View itemView) {
+        public MyViewHolder(View itemView) {
             super(itemView);
-           name= (TextView)itemView.findViewById(R.id.name);
-           image=(ImageView)itemView.findViewById(R.id.image);
+            name = (TextView) itemView.findViewById(R.id.name);
+            image = (ImageView) itemView.findViewById(R.id.image);
+
         }
     }
 }
